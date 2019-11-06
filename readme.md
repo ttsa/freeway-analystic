@@ -9,3 +9,7 @@
 1. $ php artisan migrate
 1. 下載好原始資料並解壓縮
 1. $ php artisan freeway:import [解壓縮路徑包含至 M06A/]
+
+# 疑難排解
+
+1. 如果在 100% 之前程式就自行停止，且沒有任何錯誤訊息，確認一下進度條後面的記憶體使用量，與 `php -i | grep memory_limit` 是否相符，是的話請先從 `$ php --ini` 取得你的 PHP 食用的設定檔，並調整可使用的記憶體量
