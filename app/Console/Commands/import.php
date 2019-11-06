@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use DB;
 
 class import extends Command
 {
@@ -67,9 +68,29 @@ class import extends Command
                         $rows = $this->getRow($date, $hour);
                         try {
                             $this->info(sprintf("匯入 %s-%s-%s %s 時資料", $year, $month, $day, $hour));
+                            $i = 0;
                             foreach ($rows as $data) {
                                 $data[1] = strtotime($data[1]);
                                 $data[3] = strtotime($data[3]);
+                                $import_data[$i++] = [
+                                    'VehicleType' => $data[0],
+                                    'DerectionTime_O' => $data[1],
+                                    'GantryID_O' => $data[2],
+                                    'DerectionTime_D' => $data[3],
+                                    'GantryID_D' => $data[4],
+                                    'TripLength' => $data[5],
+                                    'TripEnd' => $data[6],
+                                    'TripInformation' => $data[7],
+                                ];
+                                if ($i == env('MAX_BUNDLE', 4000)) {
+                                    DB::disableQueryLog();
+                                    DB::table('trips')->insert($import_data);
+                                    $i = 0;
+                                }
+                            }
+                            if ($i > 0) {
+                                DB::disableQueryLog();
+                                DB::table('trips')->insert($import_data);
                             }
                         } catch (\Exception $e) {
                             $this->error(sprintf("%s-%s-%s %s檔案不存在，不執行匯入工作", $year, $month, $day, $hour));
