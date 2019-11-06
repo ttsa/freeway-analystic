@@ -93,6 +93,7 @@ class import extends Command
                                 DB::table('trips')->insert($import_data);
                             }
                         } catch (\Exception $e) {
+                            $this->error($e->getMessage());
                             $this->error(sprintf("%s-%s-%s %s檔案不存在，不執行匯入工作", $year, $month, $day, $hour));
                             if (!$this->confirm('要繼續匯入下一個檔案嗎？')) {
                                 // 強制離開迴圈
