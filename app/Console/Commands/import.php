@@ -67,9 +67,14 @@ class import extends Command
                         }
                         $rows = $this->getRow($date, $hour);
                         try {
+                            $bar = $this->output->createProgressBar($this->getLineCount($date, $hour));
                             $this->info(sprintf("匯入 %s-%s-%s %s 時資料", $year, $month, $day, $hour));
+                            $bar->setFormat('debug');
+                            $bar->setRedrawFrequency(300);
+                            $bar->start();
                             $i = 0;
                             foreach ($rows as $data) {
+                                $bar->advance();
                                 $data[1] = strtotime($data[1]);
                                 $data[3] = strtotime($data[3]);
                                 $import_data[$i++] = [
@@ -92,6 +97,7 @@ class import extends Command
                                 DB::disableQueryLog();
                                 DB::table('trips')->insert($import_data);
                             }
+                            $bar->finish();
                         } catch (\Exception $e) {
                             $this->error($e->getMessage());
                             $this->error(sprintf("%s-%s-%s %s檔案不存在，不執行匯入工作", $year, $month, $day, $hour));
