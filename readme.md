@@ -8,7 +8,7 @@
     1. PHP 7.2 以上
     1. mysql 8.0 以上
     1. composer(PHP 套件管理程式)
-1. 修改 .evn.example 內的 DB\_DATABASE/DB\_USERNAME/DB\_PASSWORD/DB\_HOST 等資料庫連線資訊
+1. 修改 .evn.example 內的 DB\_DATABASE/DB\_USERNAME/DB\_PASSWORD/DB\_HOST 等資料庫連線資訊，並複製為 `.evn` 提供本機系統使用
 1. `$ composer install`
 1. `$ php artisan migrate`
 1. 下載好原始資料並解壓縮
