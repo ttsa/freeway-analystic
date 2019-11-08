@@ -16,6 +16,7 @@ services:
       - 4000:4000
     volumes:
       - .:/app
+      - /app/vendor
     depends_on:
       - db
 # RUN php artisan migrate

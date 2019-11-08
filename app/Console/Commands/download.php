@@ -114,6 +114,8 @@ class Download extends Command
         //must add $resource to the function after a newer php version. Previous comments states php 5.5
         $this->info("\nExtracting {$date}");
         system('tar -xzf ' . $file_name);
+        $this->info("\ndeleting {$file_name}");
+        unlink($file_name);
         $this->bar->finish();
     }
 
