@@ -60,8 +60,7 @@ class Freeway
             $progress = round( $downloaded_size * 100 / $download_size );
         }
 
-        if ( $progress > $previousProgress)
-        {
+        if ( $progress > $previousProgress) {
             $previousProgress = $progress;
         }
 
