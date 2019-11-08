@@ -39,7 +39,7 @@ class Freeway
         $ch = curl_init($url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_NOPROGRESS, false);
-        curl_setopt($ch, CURLOPT_PROGRESSFUNCTION, [$this, 'progressCallback']);
+        curl_setopt($ch, CURLOPT_PROGRESSFUNCTION, [$this, 'curlProgressCallback']);
         curl_setopt($ch, CURLOPT_FILE, $targetFile);
         curl_exec($ch);
         fclose($targetFile);
@@ -48,7 +48,7 @@ class Freeway
         $this->bar->finish();
     }
 
-    private function progressCallback( $resource, $download_size, $downloaded_size, $upload_size, $uploaded_size )
+    private function curlProgressCallback( $resource, $download_size, $downloaded_size, $upload_size, $uploaded_size )
     {
         static $previousProgress = 0;
 
