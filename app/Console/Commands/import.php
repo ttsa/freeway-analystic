@@ -91,6 +91,7 @@ class import extends Command
                                 if ($i == env('MAX_BUNDLE', 4000)) {
                                     DB::disableQueryLog();
                                     DB::table('trips')->insert($import_data);
+                                    $import_data = [];
                                     $i = 0;
                                 }
                             }
