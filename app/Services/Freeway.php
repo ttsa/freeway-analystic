@@ -8,6 +8,8 @@ use Symfony\Component\Console\Helper\ProgressBar;
 class Freeway
 {
     private $path;
+    private $download_file;
+
     public function __construct($path)
     {
         ProgressBar::setFormatDefinition('custom', "\n %message% %file_name%\n [%bar%] %current%/%max%");
@@ -19,7 +21,7 @@ class Freeway
         $url = 'http://tisvcloud.freeway.gov.tw/history/TDCS/M06A/M06A_' . $date .'.tar.gz';
 
         // Use basename() function to return the base name of file
-        $file_name = $this->path . '/' . basename($url);
+        $this->download_file = $file_name = $this->path . '/' . basename($url);
 
         // Use file_get_contents() function to get the file
         // from url and use file_put_contents() function to
@@ -107,6 +109,12 @@ class Freeway
             DB::table('trips')->insert($import_data);
         }
         $bar->finish();
+    }
+
+    public function unlink($date)
+    {
+        unlink($this->download_file);
+        rmdir($this->path . '/M06A/' . $date);
     }
 
     private function getLineCount($date, $hour)
