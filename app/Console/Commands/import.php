@@ -55,19 +55,19 @@ class import extends Command
                     if ($year == $start_year and $month == $start_month and $day < $start_day) {
                         continue;
                     }
+                    if ($month < 10) {
+                        $month = "0" . $month;
+                    }
+                    if ($day < 10) {
+                        $day = "0" . $day;
+                    }
+                    $date = $year . $month . $day;
                     $this->freeway->downloadFile($date, $this->output);
                     for ($hour = 0; $hour <= 23; $hour++) {
                         try {
-                            if ($month < 10) {
-                                $month = "0" . $month;
-                            }
-                            if ($day < 10) {
-                                $day = "0" . $day;
-                            }
                             if ($hour < 10) {
                                 $hour = "0" . $hour;
                             }
-                            $date = $year . $month . $day;
                             $this->info(sprintf("匯入 %s-%s-%s %s 時資料", $year, $month, $day, $hour));
                             $this->freeway->import($date, $hour, $this->output);
                         } catch (\Exception $e) {
