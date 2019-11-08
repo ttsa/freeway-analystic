@@ -63,7 +63,7 @@ class Download extends Command
                     }
                     $date = $year . $month . $day;
 
-                    $this->downloadFIle($date);
+                    $this->downloadFile($date);
                     try {
                       // echo $date . "\n";
                     } catch (\Exception $e) {
@@ -79,7 +79,7 @@ class Download extends Command
         }
     }
 
-    private function downloadFIle($date = '20150101') {
+    private function downloadFile($date = '20150101') {
         // Initialize a file URL to the variable
         $url = 'http://tisvcloud.freeway.gov.tw/history/TDCS/M06A/M06A_' . $date .'.tar.gz';
 
@@ -102,15 +102,15 @@ class Download extends Command
         $this->bar->start();
         //save progress to variable instead of a file
         $temp_progress = '';
-        $targetFile = fopen( $file_name, 'w' );
-        $ch = curl_init( $url  );
+        $targetFile = fopen($file_name, 'w');
+        $ch = curl_init($url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt( $ch, CURLOPT_NOPROGRESS, false );
-        // curl_setopt( $ch, CURLOPT_PROGRESSFUNCTION, 'progressCallback' );
-        curl_setopt( $ch, CURLOPT_PROGRESSFUNCTION, array($this, 'progressCallback') );
-        curl_setopt( $ch, CURLOPT_FILE, $targetFile );
-        curl_exec( $ch );
-        fclose( $targetFile );
+        curl_setopt($ch, CURLOPT_NOPROGRESS, false);
+        // curl_setopt($ch, CURLOPT_PROGRESSFUNCTION, 'progressCallback');
+        curl_setopt($ch, CURLOPT_PROGRESSFUNCTION, [$this, 'progressCallback']);
+        curl_setopt($ch, CURLOPT_FILE, $targetFile);
+        curl_exec($ch);
+        fclose($targetFile);
         //must add $resource to the function after a newer php version. Previous comments states php 5.5
         $this->info("\nExtracting {$date}");
         system('tar -xzf ' . $file_name);
