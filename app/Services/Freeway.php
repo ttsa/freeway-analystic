@@ -126,7 +126,7 @@ class Freeway
 
     private function getRow($date, $hour)
     {
-        $file  = sprintf($this->path . '/%s/%s/TDCS_M06A_%1$s_%2$s0000.csv', $date, $hour);
+        $file  = sprintf($this->path . '/M06A/%s/%s/TDCS_M06A_%1$s_%2$s0000.csv', $date, $hour);
         $fp = fopen($file, 'r');
         if (false === $fp) {
             return false;
