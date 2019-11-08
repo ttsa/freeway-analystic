@@ -79,6 +79,7 @@ class import extends Command
                             }
                         }
                     }
+                    $this->freeway->unlink($date);
                 }
             }
         }
