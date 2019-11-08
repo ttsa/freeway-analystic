@@ -1,7 +1,7 @@
 version: '2'
 services:
   db:
-    image: mysql:5
+    image: mysql:latest
     environment:
       MYSQL_DATABASE: freeway-analystic
       MYSQL_ROOT_PASSWORD: root
