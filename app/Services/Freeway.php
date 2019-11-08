@@ -30,8 +30,10 @@ class Freeway
         // else {
         //     echo "File {$date}.tar.gz downloading failed.";
         // }
-        //$this->info("\nDownloading {$date}");
         $this->bar = $output->createProgressBar(100);
+        $this->bar->setFormat('custom');
+        $this->bar->setMessage('Downloading');
+        $this->bar->setMessage(basename($file_name), 'file_name');
         // $this->bar->setFormat('debug');
         // $this->bar->setRedrawFrequency(300);
         $this->bar->start();
