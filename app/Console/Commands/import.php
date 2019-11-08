@@ -88,7 +88,7 @@ class import extends Command
                                     'TripEnd' => $data[6],
                                     'TripInformation' => $data[7],
                                 ];
-                                if ($i == env('MAX_BUNDLE', 4000)) {
+                                if (strlen(serialize($import_data)) > env('MAX_BUNDLE', 1048576)) {
                                     DB::disableQueryLog();
                                     DB::table('trips')->insert($import_data);
                                     $import_data = [];
