@@ -2,6 +2,7 @@
 
 資料來源為 http://tisvcloud.freeway.gov.tw/history/TDCS/M06A/ 各旅次路徑原始資料
 
+
 # 建置步驟
 
 1. 確認環境已備有
@@ -14,6 +15,17 @@
 1. `$ php artisan migrate`
 1. 下載好原始資料並解壓縮
 1. `$ php artisan freeway:import [解壓縮路徑包含至 M06A/]`
+
+# 建置步驟(2)
+
+如果你有 `docker` 可以直接用 `docker-compose up -d` 啟動，如果不要跑在背景 `docker-compose up`
+
+匯入資料就變成
+
+1. `$ docker-compose exec web php artisan migrate`
+1. 下載好原始資料並解壓縮
+1. `$ docker-compose exec web php artisan freeway:import [解壓縮路徑包含至 M06A/]`
+
 
 # 疑難排解
 
