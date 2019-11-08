@@ -61,7 +61,7 @@ class Freeway
 
     private function getLineCount($date, $hour)
     {
-        $file  = sprintf($this->path . '/%s/%s/TDCS_M06A_%1$s_%2$s0000.csv', $date, $hour);
+        $file  = sprintf($this->path . '/M06A/%s/%s/TDCS_M06A_%1$s_%2$s0000.csv', $date, $hour);
         $linecount = 0;
         $handle = fopen($file, "r");
         while(!feof($handle)){

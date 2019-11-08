@@ -13,7 +13,7 @@ class import extends Command
      * @var string
      */
     protected $signature = 'freeway:import
-                            {csvfolder : 解壓縮後的 M06A 資料夾絕對路徑(至 M06A 為止，如 /Users/bency/Downloads/M06A)}';
+                            {csvfolder : 解壓縮後的 M06A 資料夾絕對路徑(不含 M06A，如 /Users/bency/Downloads)}';
 
     /**
      * The console command description.
