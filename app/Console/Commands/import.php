@@ -101,7 +101,7 @@ class import extends Command
                             }
                             $bar->finish();
                         } catch (\Exception $e) {
-                            $this->error($e->getMessage());
+                            $this->error(substr($e->getMessage(), 0, 100));
                             $this->error(sprintf("%s-%s-%s %s檔案不存在，不執行匯入工作", $year, $month, $day, $hour));
                             if (!$this->confirm('要繼續匯入下一個檔案嗎？')) {
                                 // 強制離開迴圈
