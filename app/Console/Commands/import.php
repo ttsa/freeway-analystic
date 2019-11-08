@@ -52,7 +52,7 @@ class import extends Command
                 if ($month < 10) {
                     $month = "0" . $month;
                 }
-                $max_day = date('t', strtotime($year . $month));
+                $max_day = date('t', strtotime($year . '/' . $month));
                 for ($day = 1; $day <= $max_day; $day++) {
                     if ($year == $start_year and $month == $start_month and $day < $start_day) {
                         continue;
