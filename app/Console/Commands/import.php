@@ -55,6 +55,7 @@ class import extends Command
                     if ($year == $start_year and $month == $start_month and $day < $start_day) {
                         continue;
                     }
+                    $this->freeway->downloadFile($date, $this->output);
                     for ($hour = 0; $hour <= 23; $hour++) {
                         try {
                             if ($month < 10) {
