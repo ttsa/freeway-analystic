@@ -65,7 +65,6 @@ class Download extends Command
                         $day = "0" . $day;
                     }
                     $date = $year . $month . $day;
-
                     $this->freeway->downloadFile($date, $this->output);
                     try {
                       // echo $date . "\n";
