@@ -12,18 +12,11 @@ class Freeway
         $this->path = $path;
     }
 
-    public function import($year, $month, $day, $hour, $output)
+    public function import($date, $output)
     {
-        if ($month < 10) {
-            $month = "0" . $month;
-        }
-        if ($day < 10) {
-            $day = "0" . $day;
-        }
-        if ($hour < 10) {
-            $hour = "0" . $hour;
-        }
-        $date = $year . $month . $day;
+        $year = substr($date, 0, 4);
+        $month = substr($date, 4, 2);
+        $day = substr($date, 6, 2);
         $rows = $this->getRow($date, $hour);
         $bar = $output->createProgressBar($this->getLineCount($date, $hour));
         $bar->setFormat('debug');
