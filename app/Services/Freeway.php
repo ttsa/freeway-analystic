@@ -64,7 +64,7 @@ class Freeway
         $this->bar->setProgress($progress);
     }
 
-    public function import($date, $output)
+    public function import($date, $hour, $output)
     {
         $year = substr($date, 0, 4);
         $month = substr($date, 4, 2);

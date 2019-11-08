@@ -68,7 +68,7 @@ class import extends Command
                             }
                             $date = $year . $month . $day;
                             $this->info(sprintf("匯入 %s-%s-%s %s 時資料", $year, $month, $day, $hour));
-                            $this->freeway->import($date, $this->output);
+                            $this->freeway->import($date, $hour, $this->output);
                         } catch (\Exception $e) {
                             $this->error(substr($e->getMessage(), 0, 100));
                             $this->error(sprintf("%s-%s-%s %s檔案不存在，不執行匯入工作", $year, $month, $day, $hour));
