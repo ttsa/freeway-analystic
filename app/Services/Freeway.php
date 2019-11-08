@@ -3,12 +3,14 @@
 namespace App\Services;
 
 use DB;
+use Symfony\Component\Console\Helper\ProgressBar;
 
 class Freeway
 {
     private $path;
     public function __construct($path)
     {
+        ProgressBar::setFormatDefinition('custom', "\n %message% %file_name%\n [%bar%] %current%/%max%");
         $this->path = $path;
     }
 
