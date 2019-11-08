@@ -74,8 +74,10 @@ class Freeway
         $day = substr($date, 6, 2);
         $rows = $this->getRow($date, $hour);
         $bar = $output->createProgressBar($this->getLineCount($date, $hour));
-        $bar->setFormat('debug');
         $bar->setRedrawFrequency(300);
+        $bar->setFormat('custom');
+        $bar->setMessage('Import in db');
+        $bar->setMessage("$date $hour", 'file_name');
         $bar->start();
         $i = 0;
         $import_data = [];
