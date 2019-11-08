@@ -33,8 +33,6 @@ class Freeway
         // $this->bar->setFormat('debug');
         // $this->bar->setRedrawFrequency(300);
         $this->bar->start();
-        //save progress to variable instead of a file
-        $temp_progress = '';
         $targetFile = fopen($file_name, 'w');
         $ch = curl_init($url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -61,7 +59,6 @@ class Freeway
         if ( $progress > $previousProgress)
         {
             $previousProgress = $progress;
-            $temp_progress = $progress;
         }
 
         $this->bar->setProgress($progress);
