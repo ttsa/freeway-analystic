@@ -114,7 +114,45 @@ class Freeway
     public function unlink($date)
     {
         unlink($this->download_file);
-        rmdir($this->path . '/M06A/' . $date);
+        $this->unlinkDirectory($this->path . '/M06A/' . $date);
+    }
+
+    private function unlinkDirectory($directory)
+    {
+        if (!file_exists($directory)) {
+            return false;
+        }
+        if (!$this->directoryIsEmpty($directory)) {
+            $handle = opendir($directory);
+            while (false !== ($entry = readdir($handle))) {
+                if ($entry == "." or $entry == "..") {
+                    continue;
+                }
+                if ("dir" === (filetype($directory . '/' . $entry))) {
+                    $this->unlinkDirectory($directory . '/' . $entry);
+                    continue;
+                }
+                if ("file" === (filetype($directory . '/' . $entry))) {
+                    unlink($directory . '/' . $entry);
+                    continue;
+                }
+            }
+            closedir($handle);
+        }
+        rmdir($directory);
+    }
+
+    private function directoryIsEmpty($directory)
+    {
+        $handle = opendir($directory);
+        while (false !== ($entry = readdir($handle))) {
+            if ($entry != "." && $entry != "..") {
+                closedir($handle);
+                return false;
+            }
+        }
+        closedir($handle);
+        return true;
     }
 
     private function getLineCount($date, $hour)
