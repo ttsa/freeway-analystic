@@ -99,7 +99,9 @@ class Freeway
             ];
             if (strlen(serialize($import_data)) > env('MAX_BUNDLE', 1048576)) {
                 DB::disableQueryLog();
+                $start = microtime(true);
                 DB::table('trips')->insert($import_data);
+                $bar->setMessage(sprintf("匯入 %s 筆資料花了 %2.2f 秒", count($import_data), microtime(true) - $start));
                 $import_data = [];
                 $i = 0;
             }
