@@ -55,21 +55,12 @@ class import extends Command
                     if ($year == $start_year and $month == $start_month and $day < $start_day) {
                         continue;
                     }
-                    if ($month < 10) {
-                        $month = "0" . $month;
-                    }
-                    if ($day < 10) {
-                        $day = "0" . $day;
-                    }
-                    $date = $year . $month . $day;
+                    $date = $year . str_pad($month, 2, 0, STR_PAD_LEFT) . str_pad($day, 2, 0, STR_PAD_LEFT);
                     $this->freeway->downloadFile($date, $this->output);
                     for ($hour = 0; $hour <= 23; $hour++) {
                         try {
-                            if ($hour < 10) {
-                                $hour = "0" . $hour;
-                            }
-                            $this->info(sprintf("匯入 %s-%s-%s %s 時資料", $year, $month, $day, $hour));
-                            $this->freeway->import($date, $hour, $this->output);
+                            $this->info(sprintf("\n匯入 %s-%s-%s %s 時資料", $year, $month, $day, $hour));
+                            $this->freeway->import($date, str_pad($hour, 2, 0, STR_PAD_LEFT), $this->output);
                         } catch (\Exception $e) {
                             $this->error(substr($e->getMessage(), 0, 100));
                             $this->error(sprintf("%s-%s-%s %s檔案不存在，不執行匯入工作", $year, $month, $day, $hour));
