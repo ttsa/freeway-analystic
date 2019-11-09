@@ -12,7 +12,7 @@ class Freeway
 
     public function __construct($path)
     {
-        ProgressBar::setFormatDefinition('custom', "\n %message% %file_name%\n [%bar%] %current%/%max%");
+        ProgressBar::setFormatDefinition('custom', "\n %message% %file_name%\n [%bar%] %current%/%max% %elapsed:6s%/%estimated:-6s%");
         $this->path = $path;
     }
 
