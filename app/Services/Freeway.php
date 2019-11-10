@@ -100,6 +100,7 @@ class Freeway
             if ($i >= env('MAX_BUNDLE', 1048576)) {
                 DB::disableQueryLog();
                 $start = microtime(true);
+                $bar->setMessage("正在匯入" . count($import_data) . "筆資料");
                 DB::table('trips')->insert($import_data);
                 $bar->setMessage(sprintf("匯入 %s 筆資料花了 %2.2f 秒", count($import_data), microtime(true) - $start));
                 $import_data = [];
@@ -108,7 +109,11 @@ class Freeway
         }
         if ($i > 0) {
             DB::disableQueryLog();
+            $start = microtime(true);
+            $bar->setMessage("正在匯入" . count($import_data) . "筆資料");
             DB::table('trips')->insert($import_data);
+            $message = sprintf("匯入 %s 筆資料花了 %2.2f 秒", count($import_data), microtime(true) - $start);
+            $bar->setMessage($message);
         }
         $bar->finish();
     }
