@@ -97,7 +97,7 @@ class Freeway
                 'TripEnd' => $data[6],
                 'TripInformation' => $data[7],
             ];
-            if (strlen(serialize($import_data)) > env('MAX_BUNDLE', 1048576)) {
+            if ($i >= env('MAX_BUNDLE', 1048576)) {
                 DB::disableQueryLog();
                 $start = microtime(true);
                 DB::table('trips')->insert($import_data);
